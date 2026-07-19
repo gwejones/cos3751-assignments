@@ -59,5 +59,68 @@ An arc $X -> Y$ is consistent when every value in the current domain of $X$ has 
 Arc consistency can detect failure earlier than forward checking because it propagates the effects of domain reductions through neighbouring variables. Forward checking removes values from variables directly connected to the variable just assigned, but it does not recursively check whether those removals create new inconsistencies elsewhere. AC-3 continues revising arcs until no more domain values can be removed, or until some variable's domain becomes empty. An empty domain proves that the current CSP cannot be solved, so failure is detected before deeper search is attempted.
 
 
+= Question 2: Logical Agents
+
+== 1. Knowledge and Implementation Levels
+
+The *knowledge level* describes an agent in terms of what it knows and what its goals are. This is enough to explain the actions that rationally follow. The *implementation level* describes how that knowledge and reasoning are actually realised, for example through particular data structures, code, or a neural network. Thus a given knowledge-level behaviour can have several different implementations @russell2021aima[Sec. 7.1].
+
+== 2. Declarative Approach
+
+The declarative approach is useful because the designer can tell sentences containing facts, rules, or goals to the knowledge base and then ask what action follows. This makes the agent easier to adapt when knowledge changes, without rewriting each desired behaviour as program code. One limitation is that general-purpose inference over declarative knowledge can be less efficient than specialised procedural code. Declarative knowledge is often compiled into more efficient procedural code @russell2021aima[Sec. 7.1].
+
+== 3. Wumpus World Properties
+
+- *a) Observable:* No. It is *partially observable*, since the agent's local percepts do not reveal the complete world state, such as the locations of all of the pits and the Wumpus @russell2021aima[Sec. 7.2].
+- *b) Deterministic:* Yes. Given the current state and an action, its outcome is predictable. For example, moving forward either moves the agent one square or causes a bump at a wall @russell2021aima[Sec. 7.2].
+- *c) Episodic:* No. It is sequential because a current action changes the state and can affect the consequences and rewards of later actions. For example, firing the arrow permanently uses it @russell2021aima[Sec. 7.2].
+- *d) Static:* Yes. The world does not change while the agent is still deciding the next action. In particular, the Wumpus does not move @russell2021aima[Sec. 7.2].
+
+== 4. Entailment
+
+A knowledge base $"KB"$ entails a sentence $alpha$ when $alpha$ is true in every model in which $"KB"$ is true. Using model sets, this is written as $"KB" models alpha$ if and only if $M("KB") subset.eq M(alpha)$ @russell2021aima[Sec. 7.3].
+
+== 5. Wumpus-World Entailment
+
+No, $alpha = not P_(1,2)$ is not entailed by the given $"KB"$. The breeze rule for $(2,1)$ mentions only $P_(1,1)$, $P_(2,2)$, and $P_(3,1)$; together with $not P_(1,1)$ and $B_(2,1)$. It establishes only that at least one of $P_(2,2)$ or $P_(3,1)$ is true. It places no restriction on $P_(1,2)$, so there is a model in which the KB is true and $P_(1,2)$ is also true. Therefore $M("KB")$ is not a subset of $M(not P_(1,2))$ @russell2021aima[Secs. 7.3, 7.4.3--7.4.4].
+
+== 6. Propositional Logic
+
+*a)* $S arrow W$
+
+*b)* $(G and not S) or not W$
+
+*c)* In the given model, $G$ is true and $S$ is false, so $G and not S$ is true. Although $not W$ is false, the whole disjunction is true.
+
+== 7. Soundness and Completeness
+
+An inference procedure $i$ is *sound* if it derives only sentences that are entailed, ie. $"KB" tack_i alpha$ implies $"KB" models alpha$. It is *complete* if it can derive every sentence that is entailed, ie. if $"KB" models alpha$, then $"KB" tack_i alpha$ @russell2021aima[Sec. 7.3].
+
+== 8. Completeness of Resolution
+
+Resolution being *complete* means that it will not miss any sentence that logically follows from a propositional knowledge base. Whenever a knowledge base logically entails a conclusion, resolution can eventually prove it by deriving a contradiction. To test whether $"KB"$ entails a query $alpha$, resolution uses proof by contradiction. It adds $not alpha$ to the $"KB"$, converts the resulting sentences to CNF and repeatedly applies the resolution rule.
+
+If $"KB" models alpha$, then $"KB" and not alpha$ has is unsatisfiable. Therefore repeated resolution must eventually derive the empty clause, which represents a contradiction and proves that the assumption $not alpha$ is impossible. Hence $"KB" models alpha$. If the procedure terminates with no new clauses and no empty clause, the query is not entailed @russell2021aima[Sec. 7.5.2].
+
+== 9. Forward Chaining
+
+Forward chaining starts from the known facts and adds a rule's conclusion once all of its premises have been processed @russell2021aima[Sec. 7.5.4]. Using the initial agenda order `[A, B, M]`, the derivation is:
+
+#table(
+  columns: (auto, 1fr, 1fr),
+  align: (left, left, left),
+  stroke: 0.5pt,
+  inset: 5pt,
+  table.header([*Step*], [*Agenda after the step*], [*Inferred set after the step*]),
+  [Initial], [`[A, B, M]`], [$emptyset$],
+  [Process $A$], [`[B, M]`], [$A$],
+  [Process $B$; infer $L$ from $A and B arrow L$], [`[M, L]`], [$A, B$],
+  [Process $M$], [`[L]`], [$A, B, M$],
+  [Process $L$; infer $P$ from $L and M arrow P$], [`[P]`], [$A, B, M, L$],
+  [Process $P$; infer $Q$ from $P arrow Q$], [`[Q]`], [$A, B, M, L, P$],
+  [Pop $Q$; return true], [`[]`], [$A, B, M, L, P$],
+)
+
+
 
 #bibliography("references.bib", title: "References")
