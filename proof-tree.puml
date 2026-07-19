@@ -1,0 +1,44 @@
+@startuml
+top to bottom direction
+
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontName "Libertinus Serif"
+skinparam defaultFontSize 12
+skinparam nodesep 12
+skinparam ranksep 28
+skinparam linetype polyline
+
+skinparam rectangle {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+}
+
+rectangle "PaysFine(Thabo)\nθ1 = {p/Thabo}" as pays
+usecase "∧" as and_fine
+rectangle "Liable(Thabo, v)\nθ2 = {p2/Thabo, v2/v}" as liable
+rectangle "At(Car123, JohannesburgCBD)\nafter θ3: θ7 = {z/JohannesburgCBD}" as at_fine
+rectangle "SEZ(JohannesburgCBD)" as sez_fine
+usecase "∧" as and_liable
+rectangle "Owns(Thabo, Car123)\nθ3 = {v/Car123}" as owns
+rectangle "OutstandingOffence(Car123)\nθ4 = {v3/Car123}" as offence
+usecase "∧" as and_offence
+rectangle "Unlicensed(Thabo)\nθ5 = {d/Thabo}" as unlicensed
+rectangle "Operates(Thabo, Car123)\nafter θ4, θ5" as operates
+rectangle "At(Car123, JohannesburgCBD)\nθ6 = {z3/JohannesburgCBD}" as at_offence
+rectangle "SEZ(JohannesburgCBD)" as sez_offence
+
+pays -down- and_fine
+and_fine -down- liable
+and_fine -down- at_fine
+and_fine -down- sez_fine
+liable -down- and_liable
+and_liable -down- owns
+and_liable -down- offence
+offence -down- and_offence
+and_offence -down- unlicensed
+and_offence -down- operates
+and_offence -down- at_offence
+and_offence -down- sez_offence
+@enduml

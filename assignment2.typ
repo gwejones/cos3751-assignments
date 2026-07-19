@@ -151,4 +151,50 @@ The assignment brief labels the two parts of this question as 4.1 and 4.2, but I
 *e)* Every student is enrolled in at least one course.
 
 
+= Question 4: Inference in First-Order Logic
+
+== 1. Generalized Modus Ponens
+
+Generalized Modus Ponens (GMP) extends modus ponens to first-order logic. Given facts $p'_1, p'_2, dots, p'_n$ and a rule $(p_1 and p_2 and dots and p_n) arrow q$, if there is a substitution $theta$ such that $"SUBST"(theta, p'_i) = "SUBST"(theta, p_i)$ for every $i$, then we may infer $"SUBST"(theta, q)$. In other words, all antecedents of the rule must match known facts under one *consistent* substitution; the rule's consequent is then inferred with the same variable bindings @russell2021aima[Secs. 9.2--9.3].
+
+== 2. Backward-Chaining Proof for Thabo
+
+I use the following predicates: $"SEZ"(z)$ means that $z$ is a special enforcement zone; $"At"(v, z)$ means vehicle $v$ is in zone $z$; and $"PaysFine"(p)$ means person $p$ must pay a fine. The rules and stated facts are:
+
+$"Unlicensed"(d) and "Operates"(d, v) and "At"(v, z) and "SEZ"(z) arrow "OutstandingOffence"(v)$  \
+$"Owns"(p, v) and "OutstandingOffence"(v) arrow "Liable"(p, v)$  \
+$"Liable"(p, v) and "At"(v, z) and "SEZ"(z) arrow "PaysFine"(p)$  \
+$"SEZ"("JohannesburgCBD")$, $"Owns"("Thabo", "Car123")$, $"At"("Car123", "JohannesburgCBD")$, and $"Unlicensed"("Thabo")$.
+
+*Note:* the stated facts say that Car123 was observed in the CBD, but do not say who operated it. For the requested proof to succeed, I had to assume the fact $"Operates"("Thabo", "Car123")$. The first rule treats an offence committed under the stated law as an outstanding offence on the vehicle. Without this operation fact, the query is not entailed.
+
+Starting with the query $"PaysFine"("Thabo")$, backward chaining works backwards through the rules. Variables in different rules are standardised apart. At each $and$ junction, conjuncts are resolved from left to right, with the substitutions from each successful conjunct passed to the remaining conjuncts. The proof tree is:
+
+#figure(
+  align(center)[
+    #image("proof-tree.svg", width: 100%)
+  ],
+  caption: [Backward-chaining proof tree for $"PaysFine"("Thabo")$. A $and$ junction means that every outgoing branch must be proved. Each substitution appears at the rule-head or goal/fact unification that generates it; “after” denotes an inherited substitution. Leaves are facts.],
+)
+
+The substitutions shown in the tree are:
+
+- $theta_1 = {frac(p, "Thabo", style: "horizontal")}$
+- $theta_2 = {frac(p_2, "Thabo", style: "horizontal"), frac(v_2, v, style: "horizontal")}$
+- $theta_3 = {frac(v, "Car123", style: "horizontal")}$
+- $theta_4 = {frac(v_3, "Car123", style: "horizontal")}$
+- $theta_5 = {frac(d, "Thabo", style: "horizontal")}$
+- $theta_6 = {frac(z_3, "JohannesburgCBD", style: "horizontal")}$
+- $theta_7 = {frac(z, "JohannesburgCBD", style: "horizontal")}$
+- $theta = {frac(p, "Thabo", style: "horizontal"), frac(p_2, "Thabo", style: "horizontal"), frac(v_2, "Car123", style: "horizontal"), frac(v, "Car123", style: "horizontal"), frac(v_3, "Car123", style: "horizontal"), frac(d, "Thabo", style: "horizontal"), frac(z_3, "JohannesburgCBD", style: "horizontal"), frac(z, "JohannesburgCBD", style: "horizontal")}$
+
+All leaf goals are therefore facts. In particular, $theta_3$ grounds $v$ to $"Car123"$ before $theta_7$ unifies the remaining goal $"At"("Car123", z)$ with the location fact. Hence the query $"PaysFine"("Thabo")$ succeeds. This is goal-directed backward chaining with unification @russell2021aima[Sec. 9.4].
+
+== 3. Unification and Backward Chaining
+
+Unification is necessary because the rules contain variables whereas the query and facts often contain constants. It finds a consistent substitution that makes expressions match and carries those bindings to the remaining subgoals. For example, unifying $"Liable"(p, v)$ with $"Liable"("Thabo", "Car123")$ produces ${frac(p, "Thabo", style: "horizontal"), frac(v, "Car123", style: "horizontal")}$; this ensures that the proof concerns the same person and vehicle throughout @russell2021aima[Sec. 9.2].
+
+For this query, backward chaining has the advantage of being *goal-directed*. Beginning with $"PaysFine"("Thabo")$, it examines only rules that could establish Thabo's liability and the supporting facts. Forward chaining would instead derive every possible consequence of the legal knowledge base, including potentially irrelevant offences or fines for other people and vehicles, before answering the query @russell2021aima[Sec. 9.4].
+
+
 #bibliography("references.bib", title: "References")
