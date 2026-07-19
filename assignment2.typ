@@ -122,5 +122,33 @@ Forward chaining starts from the known facts and adds a rule's conclusion once a
 )
 
 
+= Question 3: First-Order Logic
+
+The assignment brief labels the two parts of this question as 4.1 and 4.2, but I am numbering them 3.1 and 3.2 here to be consistent with the fact that this is Question 3.
+
+== 3.1 Translate into First-Order Logic
+
+*a)* $"Athlete"("Ben") and not "Coach"("Ben")$
+
+*b)* $forall p ("Olympian"(p) arrow "Athlete"(p))$
+
+*c)* $"Trains"("Anna", "Ben") and not "Trains"("Ben", "Anna")$
+
+*d)* $exists c ("Coach"(c) and forall p ("Trains"(c, p) arrow "Professional"(p)))$
+
+*e)* $forall p (("Athlete"(p) and not "Professional"(p)) arrow exists c ("Coach"(c) and "Trains"(c, p)))$
+
+== 3.2 Translate into English
+
+*a)* T. G. Moape is a professor and teaches COS3751.
+
+*b)* No person is both a student and a professor.
+
+*c)* There is an advanced course in which no student is enrolled.
+
+*d)* There is a professor who teaches only advanced courses.
+
+*e)* Every student is enrolled in at least one course.
+
 
 #bibliography("references.bib", title: "References")
