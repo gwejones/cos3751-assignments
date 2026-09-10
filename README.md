@@ -11,3 +11,11 @@ Compile the Typst source to PDF with:
 ```sh
 typst compile assignment2.typ assignment2.pdf
 ```
+
+## Build Assignment 3
+
+The Assignment 3 source is provided as a starter template. Compile it with:
+
+```sh
+typst compile assignment3.typ assignment3.pdf
+```
