@@ -172,7 +172,7 @@ Starting with the query $"PaysFine"("Thabo")$, backward chaining works backwards
 
 #figure(
   align(center)[
-    #image("proof-tree.svg", width: 100%)
+    #image("assets/proof-tree.svg", width: 100%)
   ],
   caption: [Backward-chaining proof tree for $"PaysFine"("Thabo")$. A $and$ junction means that every outgoing branch must be proved. Each substitution appears at the rule-head or goal/fact unification that generates it; “after” denotes an inherited substitution. Leaves are facts.],
 )
