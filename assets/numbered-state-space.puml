@@ -1,0 +1,45 @@
+@startdot
+digraph numbered_state_space {
+  graph [
+    rankdir=TB,
+    bgcolor="transparent",
+    nodesep=0.28,
+    ranksep=0.42,
+    pad=0.15
+  ]
+
+  node [
+    shape=circle,
+    style=filled,
+    fillcolor=white,
+    color=black,
+    fontcolor=black,
+    fontname="Libertinus Serif",
+    fontsize=12,
+    fixedsize=true,
+    width=0.42,
+    height=0.42,
+    margin=0
+  ]
+
+  edge [color=black, arrowsize=0.7]
+
+  n1 [label="1"];
+  n2 [label="2"]; n3 [label="3"];
+  n4 [label="4"]; n5 [label="5"]; n6 [label="6"]; n7 [label="7"];
+  n8 [label="8"]; n9 [label="9"]; n10 [label="10"]; n11 [label="11"];
+  n12 [label="12"]; n13 [label="13"]; n14 [label="14"]; n15 [label="15"];
+
+  { rank=same; n2; n3; }
+  { rank=same; n4; n5; n6; n7; }
+  { rank=same; n8; n9; n10; n11; n12; n13; n14; n15; }
+
+  n1 -> n2; n1 -> n3;
+  n2 -> n4; n2 -> n5;
+  n3 -> n6; n3 -> n7;
+  n4 -> n8; n4 -> n9;
+  n5 -> n10; n5 -> n11;
+  n6 -> n12; n6 -> n13;
+  n7 -> n14; n7 -> n15;
+}
+@enddot
