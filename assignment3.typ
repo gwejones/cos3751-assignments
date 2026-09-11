@@ -156,7 +156,31 @@ game is impractical @russell2021aima[Sec. 5.3].
 
 = Question 3
 
-// Add your answer here.
+== 1. Translate into First-Order Logic
+
+Using the vocabulary supplied in the question:
+
+*a)* $"Mayor"("David") and not "Senator"("David")$
+
+*b)* $forall p ("Senator"(p) arrow "Politician"(p))$
+
+*c)* $"VotesFor"("David", "Clara") and not "VotesFor"("Clara", "David")$
+
+*d)* $exists p ("Politician"(p) and forall q ("VotesFor"(q, p) arrow ("Citizen"(q) and not "Politician"(q))))$
+
+*e)* $forall p (("Citizen"(p) and not "Senator"(p)) arrow exists q ("Mayor"(q) and "VotesFor"(p, q)))$
+
+== 2. Translate into English
+
+*a)* Ben is an athlete and is not a coach.
+
+*b)* Every Olympian is an athlete.
+
+*c)* Anna trains Ben, but Ben does not train Anna.
+
+*d)* There is a coach who trains only professionals.
+
+*e)* Every athlete who is not a professional is trained by at least one coach.
 
 = Question 4
 
