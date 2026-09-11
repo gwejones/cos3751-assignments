@@ -184,6 +184,53 @@ Using the vocabulary supplied in the question:
 
 = Question 4
 
-// Add your answer here.
+== 1. Weak AI and Strong AI
+
+*Weak AI* is the claim that a machine can behave *as if* it were intelligent. While *Strong AI* claims that a machine with such behaviour is actually
+consciously thinking, rather than merely simulating thought @russell2021aima[Sec. 27.1].
+
+== 2. Argument from Disability
+
+The argument from disability claims that a machine can never do some distinctively human
+thing, expressed as “a machine can never do $X$.” Proposed examples include being kind,
+having a sense of humour, making moral judgements, falling in love, or doing something
+genuinely new and creative. It is an objection to the possibility or scope of machine
+intelligence, based on claimed human abilities that machines supposedly cannot possess
+@russell2021aima[Sec. 27.1.2].
+
+== 3. Purpose of the Turing Test
+
+The Turing Test replaces the vague philosophical question “Can machines think?” with a
+behavioural test. An AI is assessed by whether it can conduct a text conversation well
+enough that an interrogator cannot reliably distinguish it from a human. Thus, its purpose
+is to measure apparently intelligent behaviour rather than to settle questions about an
+AI's inner mental state @russell2021aima[Secs. 1.1.1, 27.1.4].
+
+== 4. Searle's Chinese Room Argument
+
+Searle imagines an English-speaking person in a room following an English rule book to
+manipulate Chinese symbols. The person can produce fluent Chinese replies without
+understanding Chinese. Searle argues that a computer similarly follows formal symbol
+manipulation rules (syntax), so correct-looking output alone does not establish genuine
+understanding or meaning (semantics) @russell2021aima[Sec. 27.2.1].
+
+== 5. Ethical Risks and Negative Impacts of AI
+
+- *Bias and discrimination:* Biased training data or objectives can produce unfair outcomes,
+  for example in lending, hiring, education, or criminal-justice decisions.
+- *Privacy loss:* AI systems can collect, infer, expose, or enable misuse of sensitive personal
+  data, including data that was thought to be anonymised.
+- *Safety and malicious misuse:* An unreliable system can cause harm when used in
+  high-stakes settings, while attackers can manipulate a system or use AI for harmful
+  purposes @russell2021aima[Secs. 27.3.1--27.3.3].
+
+== 6. Fairness and Transparency
+
+Fairness matters because AI decisions can affect people's opportunities and rights. Systems
+must not perpetuate societal bias or treat comparable people differently because of protected
+characteristics. Transparency matters because people affected by an AI decision need to
+know how it was reached, seek an explanation, and enable audits, accountability, and trust.
+Together, these properties help reveal errors or discrimination instead of hiding them inside
+a black box @russell2021aima[Secs. 27.3.3--27.3.4].
 
 #bibliography("references.bib", title: "References")
