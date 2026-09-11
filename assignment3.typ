@@ -140,7 +140,7 @@ with alpha-beta pruning) can examine too many positions @russell2021aima[Sec. 5.
 
 The condition means that the current path is already no better than an alternative that a
 previous MAX or MIN node can force.  Therefore, none of the current node's unexplored
-successors can change the final choice.  The algorithm performs a cutoff: it stops exploring
+successors can change the final choice.  The algorithm performs a cutoff, i.e. it stops exploring
 the remaining successors of that node and prunes their branches @russell2021aima[Sec. 5.2.3].
 
 == 5. Definitions
@@ -186,8 +186,7 @@ Using the vocabulary supplied in the question:
 
 == 1. Weak AI and Strong AI
 
-*Weak AI* is the claim that a machine can behave *as if* it were intelligent. While *Strong AI* claims that a machine with such behaviour is actually
-consciously thinking, rather than merely simulating thought @russell2021aima[Sec. 27.1].
+*Weak AI* is the claim that a machine can behave *as if* it were intelligent. While *Strong AI* claims that a machine with such behaviour is actually consciously thinking, rather than merely simulating thought @russell2021aima[Sec. 27.1].
 
 == 2. Argument from Disability
 
@@ -237,7 +236,67 @@ a black box @russell2021aima[Secs. 27.3.3--27.3.4].
 
 == 1. Pressing Community Issue
 
-A pressing issue in the low-income community near where I live is high unemployment, particularly among young people. Many residents are willing to work but struggle to find stable formal employment. Limited income makes transport to interviews, internet access for online applications, and skills training difficult to afford. This can lead to financial stress
-in households and discourage job seekers over time.
+A pressing issue in the low-income community near where I live is high unemployment, particularly among young people. Many residents are willing to work but struggle to find stable formal employment. Limited income makes transport to interviews, internet access for online applications, and skills training difficult to afford. This can lead to financial stress in households and discourage job seekers over time.
+
+== 2. How AI can be used to address it effectively
+
+An appropriate intervention would be an AI-assisted, human-supported employment and
+skills navigator. It would be available through low-data channels such as WhatsApp, a
+simple mobile website, and a community-centre kiosk, so that lack of a computer or
+expensive data does not prevent participation.
+
+With the person's informed consent, the system would build a profile from their skills,
+qualifications, interests, work availability, area, and practical constraints such as a
+transport budget. It would combine this with *verified* local vacancies, learnerships,
+apprenticeships, free training opportunities, and CV or application-support services. A
+combination of eligibility rules and a matching model could rank opportunities by skill fit,
+closing date, distance and estimated transport cost, and whether the person can realistically
+complete the application.
+
+The navigator would not merely display a vacancy. For each recommendation, it would give
+a clear reason and a next step, for example: “This electrical learnership is nearby, accepts
+your qualification, and closes on Friday.” Where a job seeker lacks a required skill, it would
+recommend a realistic pathway, such as a free short course followed by a suitable entry-level
+vacancy. This turns the AI's output into an actionable plan rather than an automated decision.
+
+Community employment advisers would verify listings, assist people with applications,
+correct inaccurate profiles, and review difficult cases. Application, interview, and placement
+outcomes could be used--with consent--to improve recommendations over time. Success should
+be measured by outcomes such as interviews, completed training, and sustainable placements,
+not merely by the number of vacancies displayed. This combines learning with explicit goals,
+practical resource constraints, and human deliberation, as envisaged for future AI systems
+@russell2021aima[Secs. 28.1--28.2].
+
+== 3. Benefits and Ethical Implications
+
+1. *Improved access to opportunities:* A single local service can make vacancies, training,
+   and support visible to people who would otherwise miss them. *Privacy implication:* the
+   service should collect only information needed for matching, obtain informed consent, and
+   protect contact details, locations, and employment histories.
+
+2. *Lower job-search and transport costs:* Ranking nearby and suitable opportunities can
+   reduce unsuccessful journeys and expensive data use. *Fairness implication:* the ranking
+   must not systematically favour people from better-connected areas or those with more
+   complete digital profiles. Results should be audited across neighbourhoods and groups.
+
+3. *More relevant skills development:* Skill-gap recommendations can direct scarce time and
+   money toward training that leads to realistic opportunities. *Transparency implication:*
+   each recommendation should state the factors that mattered, and a job seeker should be
+   able to correct their profile or challenge an unsuitable recommendation.
+
+4. *Greater capacity for community advisers:* AI can triage routine matching, leaving human
+   advisers more time for CV support, applications, and complex personal circumstances.
+   *Accountability implication:* an adviser must remain responsible for consequential advice;
+   the system must not automatically reject people or make hiring decisions.
+
+5. *Continuous improvement and local insight:* Aggregated, consented outcomes can reveal
+   which training pathways lead to interviews or placements and help organisations target
+   support. *Inclusion implication:* the system needs non-digital access routes and verified
+   listings, otherwise people without smartphones, data, or digital confidence could be
+   excluded or exposed to fraudulent opportunities.
+
+These safeguards matter because AI systems can amplify existing inequality, compromise
+privacy, or make non-transparent decisions unless their objectives are designed for
+fairness, and transparency @russell2021aima[Secs. 27.3.1--27.3.4, 28.1].
 
 #bibliography("references.bib", title: "References")
