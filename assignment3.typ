@@ -50,8 +50,8 @@ See the the related exercise for deriving a procedure for determining a state's 
 *d)* The 8-puzzle is a useful AI search benchmark because it has a precise state
 representation, a small set of clearly defined legal actions, and a simple unit action
 cost, while still having a sufficiently large, branching state space to expose the
-differences among search strategies and heuristics.  It is therefore a compact example
-of the general search-problem components: states, initial state, actions, transition
+differences among search strategies and heuristics. It is therefore a good example
+of the general search-problem components such as states, initial state, actions, transition
 model, goal test, and path cost @russell2021aima[Sec. 3.2.1].
 
 == 2. Numbered state space
@@ -81,7 +81,78 @@ test. With goal state 11:
 
 = Question 2
 
-// Add your answer here.
+== 1. Minimax values
+
+The levels alternate between MAX and MIN: $A$ is MAX; $B$ and $C$ are MIN;
+and $D$, $E$, $F$, and $G$ are MAX.  Applying minimax bottom-up gives:
+
+#table(
+  columns: (auto, 1fr, auto),
+  align: (left, left, center),
+  stroke: 0.5pt,
+  inset: 4pt,
+  table.header([*Node*], [*Calculation*], [*Value*]),
+  [$D$], [$max(2, 9)$], [$9$],
+  [$E$], [$max(10, 1)$], [$10$],
+  [$F$], [$max(5, 8)$], [$8$],
+  [$G$], [$max(4, 3)$], [$4$],
+  [$B$], [$min(D, E) = min(9, 10)$], [$9$],
+  [$C$], [$min(F, G) = min(8, 4)$], [$4$],
+  [$A$], [$max(B, C) = max(9, 4)$], [$9$],
+)
+
+Thus: *a)* $D = 9$; *b)* $E = 10$; *c)* $F = 8$; *d)* $G = 4$;
+*e)* $B = 9$; *f)* $C = 4$; and *g)* $A = 9$.  At a MAX node the largest
+child value is selected, while at a MIN node the smallest is selected
+@russell2021aima[Sec. 5.2].
+
+== 2. Alpha-beta pruning
+
+I evaluate children from left to right, as drawn.  The evaluated terminal leaves, in
+order, are $H:10$, $H:5$, $I:7$, $I:11$, $J:12$, $J:8$, $L:5$, and $L:12$.
+
+The pruned branches are:
+
+- $E -> K$, including K's terminal leaves 9 and 8.
+- $C -> G$, including the whole G subtree (N and O and their terminal leaves).
+
+The final minimax value is $A = 7$.  The essential alpha-beta updates are:
+
+- At $B$, evaluating $D$ gives $D = 7$, so $B$ has $beta = 7$.  At $E$,
+  evaluating $J$ gives $J = 8$, hence $alpha_E = 8$.  Since $alpha_E >= beta_E$
+  ($8 >= 7$), $K$ cannot affect B's choice and is pruned.
+- At the root, evaluating $B$ gives $alpha_A = 7$.  In $C$, evaluating $F$
+  gives $F = 5$, hence $beta_C = 5$.  Since $alpha_C >= beta_C$ ($7 >= 5$),
+  the G subtree cannot affect A's choice and is pruned.
+
+Alpha-beta search maintains $alpha$ as MAX's best guaranteed value and $beta$ as
+MIN's best guaranteed value; a cutoff is valid once $alpha >= beta$
+@russell2021aima[Sec. 5.2.3].
+
+== 3. MCTS and a high branching factor
+
+MCTS does not need to expand and evaluate the full game tree.  It uses simulations to
+concentrate computation on promising moves, balancing exploration and exploitation.
+This makes it practical for games with very high branching factors, where minimax (even
+with alpha-beta pruning) can examine too many positions @russell2021aima[Sec. 5.4].
+
+== 4. Meaning of $alpha >= beta$
+
+The condition means that the current path is already no better than an alternative that a
+previous MAX or MIN node can force.  Therefore, none of the current node's unexplored
+successors can change the final choice.  The algorithm performs a cutoff: it stops exploring
+the remaining successors of that node and prunes their branches @russell2021aima[Sec. 5.2.3].
+
+== 5. Definitions
+
+*a) Backpropagation:* In MCTS, backpropagation is the phase after a simulation in which
+the simulation outcome updates the visit counts and value estimates of every node on the
+selected path back to the root @russell2021aima[Sec. 5.4].
+
+*b) Heuristic evaluation function:* A function that estimates the expected utility or
+desirability of a nonterminal game state.  It lets a depth-limited game-tree search treat a
+nonterminal state as an approximate terminal state when searching to the true end of the
+game is impractical @russell2021aima[Sec. 5.3].
 
 = Question 3
 
