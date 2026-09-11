@@ -67,8 +67,8 @@ The required portion of the state space is:
 )
 
 *1.2.1* I assume successors are considered in increasing numerical order (the $2k$
-successor before $2k+1$), and that ``visited'' means the node is selected for the goal
-test.  With goal state 11:
+successor before $2k+1$), and that "visited" means the node is selected for the goal
+test. With goal state 11:
 
 - *Breadth-first search:* $1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11$.
 - *Depth-limited search, limit 3:* $1, 2, 4, 8, 9, 5, 10, 11$.
