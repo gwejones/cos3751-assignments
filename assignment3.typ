@@ -233,4 +233,11 @@ know how it was reached, seek an explanation, and enable audits, accountability,
 Together, these properties help reveal errors or discrimination instead of hiding them inside
 a black box @russell2021aima[Secs. 27.3.3--27.3.4].
 
+= Question 5: The Future of AI
+
+== 1. Pressing Community Issue
+
+A pressing issue in the low-income community near where I live is high unemployment, particularly among young people. Many residents are willing to work but struggle to find stable formal employment. Limited income makes transport to interviews, internet access for online applications, and skills training difficult to afford. This can lead to financial stress
+in households and discourage job seekers over time.
+
 #bibliography("references.bib", title: "References")
